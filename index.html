@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>輸入密碼頁面</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #9C2B23;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .wrapper {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: url("image/img_pc_start.png") center top no-repeat;
+            background-size: contain;
+        }
+
+        .board {
+            display: inline-flex;
+            align-items: center;
+            margin: 34% 0 0 -4%;
+            padding: 38px 0 0 4%;
+            width: 660px;
+            height: 178px;
+            box-sizing: border-box;
+            background: url("image/board_pc.png") center top no-repeat;
+            background-size: cover;
+        }
+
+        .board input {
+            background-color: transparent;
+            text-align: center;
+            border: 0;
+            padding: 10px;
+            height: 54px;
+            font-size: 65px;
+            letter-spacing: 6px;
+            width: 55%;
+            color: #fff;
+        }
+
+        button.send {
+            cursor: pointer;
+            width: 180px;
+            height: 72px;
+            border: 0;
+            margin-left: 15px;
+            background: url("image/btn_send.png") center top no-repeat;
+            background-size: contain;
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 0;
+            z-index: 1000;
+            background: url("image/modal_bg.png") left top no-repeat;
+            background-size: cover;
+            width: 400px;
+            height: 338px;
+        }
+
+        .modal p {
+            margin: 130px auto 35px auto;
+            font-size: 2rem;
+        }
+
+        .modal button {
+            border: 0;
+            cursor: pointer;
+        }
+
+        button.btn_ok {
+            background: url("image/btn_ok.png") left top no-repeat;
+            background-size: contain;
+            width: 180px;
+            height: 171px;
+        }
+
+        button.btn_restart {
+            background: url("image/btn_restart.png") left top no-repeat;
+            background-size: contain;
+            width: 180px;
+            height: 71px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        @media (orientation:landscape) and (max-width: 1200px) {
+            .board {
+                display: inline-flex;
+                align-items: center;
+                margin: 34.1% 0 0 0;
+                padding: 25px 0 0 40px;
+                width: 480px;
+                height: 130px;
+                box-sizing: border-box;
+                background: url("image/board_pc.png") center top no-repeat;
+                background-size: cover;
+            }
+
+            .board input {
+                font-size: 40px;
+            }
+
+            button.send {
+                width: 120px;
+                height: 48px;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 1366px) {
+            .board {
+                display: inline-flex;
+                align-items: center;
+                margin: 34% 0 0 0;
+                padding: 25px 0 0 40px;
+                width: 480px;
+                height: 130px;
+                box-sizing: border-box;
+                background: url("image/board_pc.png") center top no-repeat;
+                background-size: contain;
+            }
+
+            .board input {
+                font-size: 40px;
+            }
+
+            button.send {
+                width: 120px;
+                height: 48px;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 1366px) {
+            .wrapper {
+                width: 100vw;
+                height: 100vh;
+                margin: 0 auto;
+                background: url("image/img_tablet_start.png") center top no-repeat;
+                background-size: cover;
+            }
+
+            .board {
+                display: inline-flex;
+                align-items: center;
+                margin: 74.8% 0 0 0;
+                padding: 60px 0 0 40px;
+                width: 540px;
+                height: 177px;
+                box-sizing: border-box;
+                background: url("image/board_app.png") center top no-repeat;
+                background-size: contain;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 820px) {
+            .board {
+                margin: 80.8% 0 0 0;
+                padding: 52px 0 0 40px;
+                width: 460px;
+                height: 152px;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 768px) {
+            .board {
+                margin: 74.8% 0 0 0;
+                padding: 43px 30px 0 30px;
+                width: 400px;
+                height: 132px;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 767px) {
+            .wrapper {
+                width: 100vw;
+                height: 100vh;
+                margin: 0 auto;
+                background: url("image/img_app_start.png") center top no-repeat;
+                background-size: cover;
+            }
+
+            .board {
+                display: inline-flex;
+                align-items: center;
+                margin: 114% 0 0 0;
+                padding: 38px 25px 0 25px;
+                width: 360px;
+                height: 119px;
+                box-sizing: border-box;
+                background: url("image/board_app.png") center top no-repeat;
+                background-size: contain;
+            }
+
+            .board input {
+                background-color: transparent;
+                text-align: center;
+                border: 0;
+                padding: 10px;
+                height: 44px;
+                font-size: 36px;
+                letter-spacing: 3px;
+                width: 90%;
+            }
+
+            button.send {
+                cursor: pointer;
+                width: 160px;
+                height: 44px;
+                margin-left: 10px;
+            }
+
+            .modal {
+                width: 300px;
+                height: 254px;
+            }
+
+            .modal p {
+                margin: 100px auto 30px auto;
+                font-size: 1.4rem;
+            }
+
+            button.btn_ok {
+                width: 120px;
+                height: 47px;
+            }
+
+            button.btn_restart {
+                width: 120px;
+                height: 47px;
+            }
+        }
+
+        @media (orientation:portrait) and (max-width: 390px) {
+            .board {
+                margin: 114% 0 0 0;
+                padding: 38px 25px 0 25px;
+                width: 320px;
+                height: 105px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="board">
+            <input type="text" id="passwordInput" maxlength="5" oninput="validateInput(event)"
+                onkeypress="handleEnter(event)" />
+            <button onclick="checkPassword()" class="send"></button>
+        </div>
+
+        <div class="overlay" id="overlay"></div>
+        <div class="modal" id="modal">
+            <p>你只有 <span id="attemptsLeft">5</span> 次機會！</p>
+            <button onclick="closeModalAndClearInput()" class="btn_ok"></button>
+        </div>
+
+        <div class="modal" id="resetContainer" style="display: none;">
+            <p>已達到最大嘗試次數！</p>
+            <button onclick="resetAttempts()" class="btn_restart"></button>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "70837";
+        let attempts = 5;
+
+        // 提交按鈕檢查密碼
+        function checkPassword() {
+            const userInput = document.getElementById('passwordInput').value;
+            if (userInput === correctPassword) {
+                window.location.href = "success.html";
+            } else {
+                attempts--;
+                if (attempts > 0) {
+                    document.getElementById('attemptsLeft').innerText = attempts;
+                    showModal();
+                } else {
+                    showResetOption();
+                    document.getElementById('passwordInput').disabled = true;
+                }
+            }
+        }
+
+        // 限制輸入內容只能為數字
+        function validateInput(event) {
+            const input = event.target;
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        // 處理按下 Enter 鍵的事件
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+
+        // 顯示錯誤提示的 Modal
+        function showModal() {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        // 關閉 Modal 並清除輸入框內容
+        function closeModalAndClearInput() {
+            closeModal();
+            clearInput();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function clearInput() {
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // 顯示重新開始的選項
+        function showResetOption() {
+            document.getElementById('resetContainer').style.display = 'block';
+        }
+
+        // 重置嘗試次數
+        function resetAttempts() {
+            attempts = 5;
+            document.getElementById('attemptsLeft').innerText = attempts;
+            document.getElementById('passwordInput').disabled = false;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('resetContainer').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
